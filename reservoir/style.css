@@ -1,0 +1,21 @@
+
+
+/*   Button   */
+.button:hover {
+    background-color: #037286;
+    border: 1px solid #000000;
+}
+
+.button:active {
+    background-color: #037286;
+    border: 1px solid #222222;
+}
+
+.button:focus {
+    outline: none;
+}
+
+.disabled {
+    opacity: 0.6;
+    pointer-events: none
+}

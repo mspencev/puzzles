@@ -1,0 +1,28 @@
+{
+  "name": "alphabet_server",
+  "homepage": "https://mspencev.github.io/alphabet/index.html",
+  "email": "",
+  "repository": "https://github.com/mspencev/alphabet",
+  "version": "0.1.0",
+  "author": "mspencev",
+  "description": "Tool for teaching the alphabet",
+  "dependencies": {
+    "package.json": "^2.0.1"
+  },
+  "devDependencies": {
+    "async": "^1.5.0",
+    "chai": "^4.1.2",
+    "express": "^4.13.3",
+    "compression": "^1.6.0",
+    "mocha": "^5.0.5",
+    "request": "^2.67.0",
+    "yargs": "^4.7.1",
+    "node-dev": "^3.1.0"
+  },
+  "scripts": {
+    "start": "node-dev server.js",
+    "add-hook": "./hooks/setup.sh",
+    "watch": "nodemon -e ts,less",
+    "test": "mocha -r ts-node/register \"src/**/*.test.ts\""
+  }
+}
