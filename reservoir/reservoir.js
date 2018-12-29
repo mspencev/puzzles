@@ -21,13 +21,18 @@ let maxY = -minY;
 let curFlowX;
 let curFlowY;
 
-scan = []; // our 2D array of the scan 
+let scan = []; // our 2D array of the scan 
+
+let playing = false;
+let solved = false;
 
 const nextBtn = document.getElementById('next-btn');
+const playBtn = document.getElementById('play-btn');
 const resetBtn = document.getElementById('reset-btn');
 
 document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener('click', onNext);
+    playBtn.addEventListener('click', onPlay);
     resetBtn.addEventListener('click', onReset);
 });
 
@@ -41,7 +46,7 @@ const readInput = () => {
             return;
         }
 
-        console.log('text: ', text.split('\n'));
+        // console.log('text: ', text.split('\n'));
 
         clayLocs = []
         text.split('\n').forEach((pair) => {
@@ -166,6 +171,9 @@ placeNextFlow = () => {
     if (curFlowY + 1 > maxY) {
         console.log('Found the bottom!', curFlowY, maxY);
         nextBtn.classList.add('disabled');
+        solved = true;
+        const count = getWaterCount();
+        document.getElementById('count').innerHTML=` Water cell count = ${count}`;
         return;
     }
 
@@ -254,12 +262,48 @@ setScan = (cellValue, x, y) => {
     scan[x][y] = cellValue;
     curFlowX = x;
     curFlowY = y;
-    drawScan();
+    if(!playing) {
+        drawScan();
+        const count = getWaterCount();
+        document.getElementById('count').innerHTML=` Water cell count = ${count}`;
+    }
+}
+
+getWaterCount = () => {
+    let count = 0;
+    for(let x = 0; x < scan.length; ++x){
+        for(let y = 0; y < scan[0].length; ++y){
+            if(scan[x][y] === FLOW || scan[x][y] === SETTLED){
+                count += 1;
+            }
+        }
+    }
+    return count;
 }
 
 onNext = () => {
     placeNextFlow();
     drawScan();
+}
+
+onPlay = () => {
+    playing = true;
+    while(!solved){
+        placeNextFlow();
+    }
+    drawScan();
+    nextBtn.classList.add('disabled');
+    playBtn.classList.add('disabled');
+}
+
+onReset = () => {
+    playing = false;
+    solved = false;
+    scan = [];
+    readInput();
+    nextBtn.classList.remove('disabled');
+    playBtn.classList.remove('disabled');
+    document.getElementById('count').innerHTML='';
 }
 
 readInput();

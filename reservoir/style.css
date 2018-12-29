@@ -1,13 +1,36 @@
 
 
+
+body {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+
 /*   Button   */
+.button {
+    width: 60px;
+    height: 30px;
+    border-width: medium;
+    background-color: #f1f1f1;
+
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+
 .button:hover {
-    background-color: #037286;
+    background-color: #c9c9c9;
     border: 1px solid #000000;
+    user-select: auto;
 }
 
 .button:active {
-    background-color: #037286;
+    background-color: #c9c9c9;
     border: 1px solid #222222;
 }
 
